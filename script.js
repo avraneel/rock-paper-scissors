@@ -57,6 +57,10 @@ function playRound(humanChoice) {
         roundResult.textContent = "Draw Round";
 
     resultSection.appendChild(roundResult);
+
+    const scoreDisplay = document.createElement("p");
+    scoreDisplay.textContent = "Computer:\t" + computerScore + "\nYou:\t" + humanScore;
+    resultSection.appendChild(scoreDisplay);
 }
 
 rockButton.addEventListener("click", () => playRound("rock"));

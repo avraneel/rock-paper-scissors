@@ -40,4 +40,22 @@ function playRound() {
     }
 }
 
-playRound();
+function playGame() {
+    for(let i = 0; i<5; i++) {
+        console.log("Round " + (i+1));
+        playRound();
+    }
+    console.log("Human has " + humanScore + " points.");
+    console.log("Computer has " + computerScore + " points.");
+    if(humanScore > computerScore) {
+        console.log("Human wins the game.");
+    }
+    else if(computerScore > humanScore) {
+        console.log("Computer wins the game.")
+    }
+    else {
+        console.log("Game is draw.");
+    }
+}
+
+playGame();

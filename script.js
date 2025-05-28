@@ -1,7 +1,5 @@
 "use strict";
 
-console.log("Test");
-
 function getComputerChoice() {
     const value = Math.floor(Math.random()*3);
     if(value == 0) {
@@ -22,23 +20,48 @@ function getHumanChoice() {
 let humanScore = 0;
 let computerScore = 0;
 
-function playRound() {
-    const human = getHumanChoice().toLowerCase();
-    const computer = getComputerChoice();
-    console.log("Computer plays " + computer);
+const rockButton = document.querySelector("#rock");
+const paperButton = document.querySelector("#paper");
+const scissorsButton = document.querySelector("#scissors");
 
-    if(human == "rock" && computer == "paper" || human == "paper" && computer == "scissors" || human == "scissors" && computer == "rock") {
+function playRound(humanChoice) {
+
+    const resultSection = document.querySelector(".result");
+
+    const humanMoveDisplay = document.createElement("p");
+    humanMoveDisplay.textContent = "You play " + humanChoice;
+    resultSection.appendChild(humanMoveDisplay);
+
+    //const human = getHumanChoice().toLowerCase();
+    const computer = getComputerChoice();
+
+    const computerMoveDisplay = document.createElement("p");
+    computerMoveDisplay.textContent = "Computer plays " + computer;
+    resultSection.appendChild(computerMoveDisplay);
+
+    const roundResult = document.createElement("p");
+
+    if( humanChoice == "rock" && computer == "paper" 
+        || humanChoice == "paper" && computer == "scissors" 
+        || humanChoice == "scissors" && computer == "rock") {
         computerScore++;
-        console.log("Computer wins.");
+        roundResult.textContent = "Computer Wins";
     }
-    else if(human == "paper" && computer == "rock" || human == "scissors" && computer == "paper" || human == "rock" && computer == "scissors") {
+    else if( humanChoice == "paper" && computer == "rock" 
+             || humanChoice == "scissors" && computer == "paper" 
+             || humanChoice == "rock" && computer == "scissors") {
         humanScore++;
-        console.log("Human wins.");
+        roundResult.textContent = "You Win";
     }
-    else {
-        console.log("Draw round.")
-    }
+    else
+        roundResult.textContent = "Draw Round";
+
+    resultSection.appendChild(roundResult);
 }
+
+rockButton.addEventListener("click", () => playRound("rock"));
+paperButton.addEventListener("click", () => playRound("paper"));
+scissorsButton.addEventListener("click", () => playRound("scissors"));
 
 function playGame() {
     for(let i = 0; i<5; i++) {
@@ -57,5 +80,3 @@ function playGame() {
         console.log("Game is draw.");
     }
 }
-
-playGame();
